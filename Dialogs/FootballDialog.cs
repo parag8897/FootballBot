@@ -119,12 +119,12 @@
                         // PriceStarting = random.Next(80, 450),
                         Image = $"https://www.games4reloaded.com/wp-content/uploads/2018/07/prediction-800x445.jpg",
                         MoreImages = new List<string>()
-                    {
+                        {
                         "https://nesncom.files.wordpress.com/2018/07/samuel-umtiti.jpg?w=640",
                         "https://media.fox4news.com/media.fox4news.com/photo/2018/07/09/France%20vs%20Belgium_1531173430360.jpg_5771874_ver1.0_640_360.jpg",
                         "https://images.indianexpress.com/2018/07/fifa-ap-m.jpg",
                         "https://cdn.images.dailystar.co.uk/dynamic/1/photos/437000/France-vs-Belgium-World-Cup-Russia-semi-final-girls-1389437.jpg"
-                    }
+                        }
                     };
 
                     matches.Add(match);

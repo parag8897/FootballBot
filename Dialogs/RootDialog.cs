@@ -20,9 +20,10 @@
 
         public async Task StartAsync(IDialogContext context)
         {
-            await context.PostAsync("Hi....There!");
+            //await context.PostAsync("Hi....There!");
             context.Wait(this.MessageReceivedAsync);
         }
+
 
         public virtual async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
@@ -81,6 +82,7 @@
                 await ShowOptionsAsync(context);
             }
         }
+
 
         private async Task ShowOptionsAsync(IDialogContext context)
         {
@@ -176,10 +178,12 @@
             context.Wait(MessageReceivedAsync);
         }
 
+
         private async Task ResumeAfterOptionDialog(IDialogContext context, IAwaitable<object> result)
         {
             context.Wait(this.MessageReceivedAsync);
         }
+
 
         private async Task ResumeAfterSupportDialog(IDialogContext context, IAwaitable<int> result)
         {
@@ -188,6 +192,7 @@
             await context.PostAsync($"Thanks for contacting our support team. Your ticket number is {ticketNumber}.");
             context.Wait(this.MessageReceivedAsync);
         }
+
 
         private static AdaptiveCard GetFootballSearchCard()
         {
