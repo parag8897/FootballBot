@@ -374,3 +374,4 @@ To get more information about how to get started in Bot Builder for Node and Att
 
 > **Limitations**
 > The functionality provided in this sample only works with WebChat and the Emulator. Other channels have limited functionality as described in the following [link](https://github.com/Microsoft/AdaptiveCards/issues/367).# FootballBot
+# FootballBot
