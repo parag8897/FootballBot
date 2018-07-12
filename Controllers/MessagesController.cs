@@ -1,5 +1,6 @@
 ﻿namespace BotBuilder.Samples.AdaptiveCards
 {
+    using System;
     using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
@@ -41,6 +42,11 @@
                 // Handle conversation state changes, like members being added and removed
                 // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
                 // Not available in all channels
+
+                // Note: Add introduction here:
+                ConnectorClient connector = new ConnectorClient(new Uri(message.ServiceUrl));
+                Activity reply = message.CreateReply("Hello from my simple Bot!");
+                connector.Conversations.ReplyToActivityAsync(reply);
             }
             else if (message.Type == ActivityTypes.ContactRelationUpdate)
             {
