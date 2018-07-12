@@ -18,7 +18,7 @@
             var message = context.Activity as IMessageActivity;
             var query = FootballQuery.Parse(message.Value);
 
-            await context.PostAsync($"Ok. Searching League Matches Between   {query.Team1} and {query.Team2} ");
+            await context.PostAsync($"Ok. Searching for League Matches Between   {query.Team1} and {query.Team2} ");
 
             try
             {
