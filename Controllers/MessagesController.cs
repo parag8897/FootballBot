@@ -45,7 +45,7 @@
 
                 // Note: Add introduction here:
                 ConnectorClient connector = new ConnectorClient(new Uri(message.ServiceUrl));
-                Activity reply = message.CreateReply("Hello from my simple Bot!");
+                Activity reply = message.CreateReply("Hello from my simple Bot ...welcome!");
                 connector.Conversations.ReplyToActivityAsync(reply);
             }
             else if (message.Type == ActivityTypes.ContactRelationUpdate)
