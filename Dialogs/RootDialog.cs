@@ -37,14 +37,14 @@
                 switch (submitType)
                 {
                     case "MatchSearch":
-                        FootballQuery query;
+                        FootballQuery query1;
                         try
                         {
-                            query = FootballQuery.Parse(value);
+                            query1 = FootballQuery.Parse(value);
 
                             // Trigger validation using Data Annotations attributes from the FootballsQuery model
                             List<ValidationResult> results = new List<ValidationResult>();
-                            bool valid = Validator.TryValidateObject(query, new ValidationContext(query, null, null), results, true);
+                            bool valid = Validator.TryValidateObject(query1, new ValidationContext(query1, null, null), results, true);
                             if (!valid)
                             {
                                 // Some field in the Football Query are not valid
@@ -70,6 +70,38 @@
                         context.Wait(MessageReceivedAsync);
 
                         return;
+
+                    case "LivescoreSearch":
+                        FootballQuery query2;
+                        try
+                        {
+                            query2 = FootballQuery.Parse(value);
+
+                            // Trigger validation using Data Annotations attributes from the FootballsQuery model
+                            List<ValidationResult> results = new List<ValidationResult>();
+                            bool valid = Validator.TryValidateObject(query2, new ValidationContext(query2, null, null), results, true);
+                            if (!valid)
+                            {
+                                // Some field in the Football Query are not valid
+                                var errors = string.Join("\n", results.Select(o => " - " + o.ErrorMessage));
+                                await context.PostAsync("Please complete all the search parameters:\n" + errors);
+                                return;
+                            }
+                        }
+                        catch (InvalidCastException)
+                        {
+                            // Football Query could not be parsed
+                            await context.PostAsync("Please complete all the search parameters");
+                            return;
+                        }
+
+                        // Proceed with Livescore search
+                        await context.Forward(new LivescoreDialog(), this.ResumeAfterOptionDialog, message, CancellationToken.None);
+
+                        return;
+
+
+
                 }
             }
 
@@ -147,18 +179,19 @@
                     {
                         Title = "Livescore",
                         Speak = "<s>Livescore</s>",
-                        Card = new AdaptiveCard()
-                        {
-                            Body = new List<CardElement>()
-                            {
-                                new TextBlock()
-                                {
-                                    Text = "Flights is not implemented =(",
-                                    Speak = "<s>Flights is not implemented</s>",
-                                    Weight = TextWeight.Bolder
-                                }
-                            }
-                        }
+                        //Card = new AdaptiveCard()
+                        //{
+                        //    Body = new List<CardElement>()
+                        //    {
+                        //        new TextBlock()
+                        //        {
+                        //            Text = "Flights is not implemented =(",
+                        //            Speak = "<s>Flights is not implemented</s>",
+                        //            Weight = TextWeight.Bolder
+                        //        }
+                        //    }
+                        //}
+                        Card=GetFootballLivescoreCard()
 
                     }
                 }
@@ -285,7 +318,7 @@
                         },
                         SelectAction = new OpenUrlAction()
                         {
-                             Url = "https://dev.botframework.com/"
+                             Url = "https://www.fifa.com/worldcup/"
                         }
                     }
                 }
@@ -301,6 +334,58 @@
             reply.Attachments.Add(attachment);
 
             await context.PostAsync(reply, CancellationToken.None);
+        }
+
+
+        private static AdaptiveCard GetFootballLivescoreCard()
+        {
+            return new AdaptiveCard()
+            {
+                Body = new List<CardElement>()
+                {
+                        // Footballs Search form
+                        new TextBlock()
+                        {
+                            Text = "Welcome to the Football Carnival!",
+                            Speak = "<s>Welcome to the Football Carnival!</s>",
+                            Weight = TextWeight.Bolder,
+                            Size = TextSize.Large
+                        },
+                        new TextBlock() { Text = "Please enter your team 1:" },
+                        new TextInput()
+                        {
+                            Id = "Team1",
+                            Speak = "<s>Please enter your team 1</s>",
+                            Placeholder = "France, Brasil,etc",
+                            Style = TextInputStyle.Text
+                        },
+                        new TextBlock() { Text = "Please enter your team 2:" },
+                        new TextInput()
+                        {
+                            Id = "Team2",
+                            Speak = "<s>Please enter your team 2</s>",
+                            Placeholder = "France, Brasil,etc",
+                            Style = TextInputStyle.Text
+                        },
+                        //new TextBlock() { Text = "How many nights do you want to stay?" },
+                        //new NumberInput()
+                        //{
+                        //    Id = "Nights",
+                        //    Min = 1,
+                        //    Max = 60,
+                        //    Speak = "<s>How many nights do you want to stay?</s>"
+                        //}
+                },
+                Actions = new List<ActionBase>()
+                {
+                    new SubmitAction()
+                    {
+                        Title = "Search",
+                        Speak = "<s>Search</s>",
+                        DataJson = "{ \"Type\": \"LivescoreSearch\" }"
+                    }
+                }
+            };
         }
     }
 }

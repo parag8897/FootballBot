@@ -171,6 +171,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Dialogs\LivescoreDialog.cs" />
     <Compile Include="Dialogs\FootballDialog.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
     <Compile Include="Dialogs\SupportDialog.cs" />
@@ -179,10 +180,13 @@
     </Compile>
     <Compile Include="Football.cs" />
     <Compile Include="FootballQuery.cs" />
+    <Compile Include="Livescore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="data.json" />
+    <Content Include="stadium.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
