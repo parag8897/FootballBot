@@ -5,9 +5,13 @@ User is asked two select their choices between Leagues or Livescore and asked to
 
 
 It uses following :
+
 API :https://apifootball.com
+
 BOT framework:https://dev.botframework.com/
-Microsoft Visual Studio 2017:https://visualstudio.microsoft.com 
+
+Microsoft Visual Studio 2017:https://visualstudio.microsoft.com
+
 LUIS AI engine:https://www.luis.ai/
 
 
