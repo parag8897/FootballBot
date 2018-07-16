@@ -24,6 +24,8 @@
 
         public string Team2 { get; set; }
 
+        public string lscore { get; set; }
+
 
     }
 }
