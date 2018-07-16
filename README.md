@@ -4,7 +4,7 @@ This Chatbot helps you to find the league matches and livescore between two team
 User is asked two select their choices between Leagues or Livescore and asked to enter the two team names.Result is shown as adaptive cards which is implemented using BOT framework.
 
 
-It uses following :
+It refers following :
 
 API :https://apifootball.com
 
