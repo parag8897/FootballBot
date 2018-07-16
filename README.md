@@ -15,3 +15,6 @@ Microsoft Visual Studio 2017:https://visualstudio.microsoft.com
 LUIS AI engine:https://www.luis.ai/
 
 Output :
+
+![Sample Outcome](images/4.jpg)
+![Sample Outcome](images/5.jpg)
