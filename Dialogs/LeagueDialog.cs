@@ -72,7 +72,7 @@
 
         private Column AsFootballItem(League match)
         {
-            var submitActionData = JObject.Parse("{ \"Type\": \"MatchSelection\" }");
+            var submitActionData = JObject.Parse("{ \"Type\": \"leagueSelection\" }");
             submitActionData.Merge(JObject.FromObject(match));
 
             return new Column()
@@ -114,6 +114,7 @@
                     {
                         Name = $"Match No. {i}",
                         Team1 = searchQuery.Team1,
+                        Team2=searchQuery.Team2,
                         // Rating = random.Next(1, 5),
                         // NumberOfReviews = random.Next(0, 5000),
                         // PriceStarting = random.Next(80, 450),
@@ -135,6 +136,7 @@
                     {
                         Name = $"Match No. {i}",
                         Team2 = searchQuery.Team2,
+                        Team1 = searchQuery.Team1,
                         // Rating = random.Next(1, 5),
                         // NumberOfReviews = random.Next(0, 5000),
                         // PriceStarting = random.Next(80, 450),
