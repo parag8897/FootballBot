@@ -113,7 +113,7 @@
                     League match = new League()
                     {
                         Name = $"Match No. {i}",
-                        Location = searchQuery.Team1,
+                        Team1 = searchQuery.Team1,
                         // Rating = random.Next(1, 5),
                         // NumberOfReviews = random.Next(0, 5000),
                         // PriceStarting = random.Next(80, 450),
@@ -134,7 +134,7 @@
                     League match = new League()
                     {
                         Name = $"Match No. {i}",
-                        Location = searchQuery.Team2,
+                        Team2 = searchQuery.Team2,
                         // Rating = random.Next(1, 5),
                         // NumberOfReviews = random.Next(0, 5000),
                         // PriceStarting = random.Next(80, 450),

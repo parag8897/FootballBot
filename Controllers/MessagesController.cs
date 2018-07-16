@@ -1,6 +1,7 @@
 ﻿namespace BotBuilder.Samples.AdaptiveCards
 {
     using System;
+    using System.Linq;
     using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
@@ -44,9 +45,20 @@
                 // Not available in all channels
 
                 // Note: Add introduction here:
-                ConnectorClient connector = new ConnectorClient(new Uri(message.ServiceUrl));
-                Activity reply = message.CreateReply("Hello from my simple Bot ...welcome!");
-                connector.Conversations.ReplyToActivityAsync(reply);
+                IConversationUpdateActivity update = message;
+                var client = new ConnectorClient(new Uri(message.ServiceUrl), new MicrosoftAppCredentials());
+                if (update.MembersAdded != null && update.MembersAdded.Any())
+                {
+                    foreach (var newMember in update.MembersAdded)
+                    {
+                        if (newMember.Id != message.Recipient.Id)
+                        {
+                            var reply = message.CreateReply();
+                            reply.Text = $"Hi there! {newMember.Name}!";
+                            client.Conversations.ReplyToActivityAsync(reply);
+                        }
+                    }
+                }
             }
             else if (message.Type == ActivityTypes.ContactRelationUpdate)
             {

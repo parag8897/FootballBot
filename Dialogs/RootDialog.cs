@@ -36,7 +36,7 @@
                 string submitType = value.Type.ToString();
                 switch (submitType)
                 {
-                    case "MatchSearch":
+                    case "leagueSearch":
                         FootballQuery query1;
                         try
                         {
@@ -65,7 +65,7 @@
 
                         return;
 
-                    case "MatchSelection":
+                    case "leagueSelection":
                         await SendFootballSelectionAsync(context, (League)JsonConvert.DeserializeObject<League>(value.ToString()));
                         context.Wait(MessageReceivedAsync);
 
@@ -272,16 +272,16 @@
                     {
                         Title = "Search",
                         Speak = "<s>Search</s>",
-                        DataJson = "{ \"Type\": \"MatchSearch\" }"
+                        DataJson = "{ \"Type\": \"leagueSearch\" }"
                     }
                 }
             };
         }
 
      
-        private static async Task SendFootballSelectionAsync(IDialogContext context, League Football)
+        private static async Task SendFootballSelectionAsync(IDialogContext context, League league)
         {
-            var description = $"{Football.Rating} start with {Football.NumberOfReviews}. From ${Football.PriceStarting} per night.";
+           // var description = $"{Football.Rating} start with {Football.NumberOfReviews}. From ${Football.PriceStarting} per night.";
             var card = new AdaptiveCard()
             {
                 Body = new List<CardElement>()
@@ -292,25 +292,25 @@
                         {
                             new TextBlock()
                             {
-                                Text = $"{Football.Name} :: {Football.Location} vs {Football.Team2}",
+                                Text = $"{league.Name} :: {league.Team1} vs {league.Team2}",
                                 Weight = TextWeight.Bolder,
-                                Speak = $"<s>{Football.Name}</s>"
+                                Speak = $"<s>{league.Name}</s>"
                             },
                             new TextBlock()
                             {
-                                Text = description,
-                                Speak = $"<s>{description}</s>"
+                                Text = "Incredible",
+                                Speak = $"<s>Incredible</s>"
                             },
                             new Image()
                             {
                                 Size = ImageSize.Large,
-                                Url = Football.Image
+                                Url = league.Image
                             },
                             new ImageSet()
                             {
                                 ImageSize = ImageSize.Medium,
                                 Separation = SeparationStyle.Strong,
-                                Images = Football.MoreImages.Select(img => new Image()
+                                Images = league.MoreImages.Select(img => new Image()
                                 {
                                     Url = img
                                 }).ToList()
