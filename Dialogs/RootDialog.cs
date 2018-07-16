@@ -61,12 +61,12 @@
                         }
 
                         // Proceed with Footballs search
-                        await context.Forward(new FootballDialog(), this.ResumeAfterOptionDialog, message, CancellationToken.None);
+                        await context.Forward(new LeagueDialog(), this.ResumeAfterOptionDialog, message, CancellationToken.None);
 
                         return;
 
                     case "MatchSelection":
-                        await SendFootballSelectionAsync(context, (Football)JsonConvert.DeserializeObject<Football>(value.ToString()));
+                        await SendFootballSelectionAsync(context, (League)JsonConvert.DeserializeObject<League>(value.ToString()));
                         context.Wait(MessageReceivedAsync);
 
                         return;
@@ -279,7 +279,7 @@
         }
 
      
-        private static async Task SendFootballSelectionAsync(IDialogContext context, Football Football)
+        private static async Task SendFootballSelectionAsync(IDialogContext context, League Football)
         {
             var description = $"{Football.Rating} start with {Football.NumberOfReviews}. From ${Football.PriceStarting} per night.";
             var card = new AdaptiveCard()

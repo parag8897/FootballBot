@@ -70,7 +70,7 @@
             await context.PostAsync(reply);
         }
 
-        private Column AsFootballItem(Football match)
+        private Column AsFootballItem(League match)
         {
             var submitActionData = JObject.Parse("{ \"Type\": \"MatchSelection\" }");
             submitActionData.Merge(JObject.FromObject(match));
@@ -101,16 +101,16 @@
             };
         }
 
-        private IEnumerable<Football> GetLivescore(FootballQuery searchQuery)
+        private IEnumerable<League> GetLivescore(FootballQuery searchQuery)
         {
-            var matches = new List<Football>();
+            var matches = new List<League>();
 
             // Filling the hotels results manually just for demo purposes
             for (int i = 1; i <= 2; i++)
             {
                 if (i == 1)
                 {
-                    Football match = new Football()
+                    League match = new League()
                     {
                         Name = $"Match No. {i}",
                         Location = searchQuery.Team1,
@@ -131,7 +131,7 @@
                 }
                 else
                 {
-                    Football match = new Football()
+                    League match = new League()
                     {
                         Name = $"Match No. {i}",
                         Location = searchQuery.Team2,
