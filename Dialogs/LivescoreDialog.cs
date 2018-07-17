@@ -36,34 +36,21 @@
         {
             var Livescore= this.GetLivescore(searchQuery);
 
-            // Result count
-            var title = $"I found Livescore between your teams your teams:";
-            var intro = new List<CardElement>()
+            var heroCard = new ThumbnailCard
             {
-                    new TextBlock()
-                    {
-                        Text = title,
-                        Size = TextSize.ExtraLarge,
-                        Speak = $"<s>{title}</s>"
-                    }
+                Title = "BotFramework Thumbnail Card",
+                Subtitle = "Your bots — wherever your users are talking",
+                Text = "Build and connect intelligent bots to interact with your users naturally wherever they are, from text/sms to Skype, Slack, Office 365 mail and other popular services.",
+                Images = new List<CardImage> { new CardImage("https://sec.ch9.ms/ch9/7ff5/e07cfef0-aa3b-40bb-9baa-7c9ef8ff7ff5/buildreactionbotframework_960.jpg") },
+                Buttons = new List<CardAction> { new CardAction(ActionTypes.OpenUrl, "Get Started", value: "https://docs.microsoft.com/bot-framework") }
             };
 
-            // Hotels in rows of three
-            var rows = Split(Livescore, 2)
-                .Select(group => new ColumnSet()
-                {
-                    Columns = new List<Column>(group.Select(AsFootballItem))
-                });
-
-            var card = new AdaptiveCard()
-            {
-                Body = intro.Union(rows).ToList()
-            };
+          //  return heroCard.ToAttachment();
 
             Attachment attachment = new Attachment()
             {
                 ContentType = AdaptiveCard.ContentType,
-                Content = card
+                Content = heroCard
             };
 
             var reply = context.MakeMessage();
